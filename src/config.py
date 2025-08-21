@@ -10,3 +10,5 @@ def get_key(key_name):
 if __name__ == "__main__":
     load_env()
     print("API_KEY present:", get_key("API_KEY") is not None)
+
+
