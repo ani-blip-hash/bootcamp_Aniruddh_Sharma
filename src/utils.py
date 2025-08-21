@@ -370,6 +370,8 @@ def data_quality_report(df: pd.DataFrame) -> dict:
     if len(numeric_cols) > 0:
         report['numeric_stats'] = df[numeric_cols].describe().to_dict()
     
+    return report
+    
 def get_alphavantage_functions() -> dict:
     """Return available Alpha Vantage functions and their descriptions."""
     return {
@@ -465,5 +467,3 @@ def fetch_global_quote(symbol: str) -> pd.DataFrame:
     except Exception as e:
         print(f"❌ Error fetching quote for {symbol}: {str(e)}")
         return pd.DataFrame()
-
-    return report

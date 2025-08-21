@@ -1,22 +1,23 @@
-# bootcamp_Aniruddh_Sharma
+# Portfolio Risk Management System
 
-# Optimizing Bike-Sharing Demand in New York City
+# Intelligent Portfolio Risk Assessment and Optimization
 
 ## Project Scoping Paragraph
 
-New York City's public bike-sharing system experiences fluctuating demand across neighborhoods and times of day. This causes shortages in high-demand areas and surpluses in low-demand areas, reducing efficiency and user satisfaction.
+Institutional investors and portfolio managers face significant challenges in managing risk across diversified portfolios, especially during volatile market conditions. Traditional risk metrics often fail to capture complex interdependencies between assets, leading to unexpected losses and suboptimal portfolio performance. Current risk management systems lack real-time adaptability and fail to integrate alternative data sources that could provide early warning signals.
 
-The primary stakeholder is CitiBike's operations team. This project will create a **predictive model** that forecasts demand for the next 24 hours. Outputs will be a **metric** (predicted number of bikes needed per station) and an **artifact** (interactive dashboard).
+The primary stakeholders are **portfolio managers**, **risk officers**, and **institutional investors** who need actionable insights to optimize risk-adjusted returns. This project will create a **comprehensive risk management system** that provides real-time portfolio risk assessment, stress testing capabilities, and optimization recommendations. Outputs will be **risk metrics** (VaR, CVaR, Sharpe ratios), **stress test scenarios**, and an **interactive risk dashboard** for portfolio monitoring and decision-making.
 
 ---
 
 ## Goals → Lifecycle → Deliverables Mapping
 
-| Goals                                     | Lifecycle Stage  | Deliverables                      |
-| ----------------------------------------- | ---------------- | --------------------------------- |
-| Understand demand patterns                | Data Exploration | EDA report, visualizations        |
-| Predict hourly demand per station         | Modeling         | Trained machine learning model    |
-| Enable operations to plan redistributions | Deployment       | Interactive dashboard + model API |
+| Goals                                     | Lifecycle Stage      | Deliverables                           |
+| ----------------------------------------- | -------------------- | -------------------------------------- |
+| Assess portfolio risk exposure            | Data Exploration     | Risk analysis report, correlation matrices |
+| Build risk prediction models             | Modeling             | VaR/CVaR models, stress testing framework |
+| Enable real-time risk monitoring         | Deployment           | Risk dashboard, automated alerts       |
+| Optimize portfolio allocation             | Optimization         | Portfolio optimization engine          |
 
 ## Repository Structure
 

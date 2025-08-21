@@ -1,22 +1,91 @@
-## Ignore local class materials
-class_materials/
+# Environment variables and secrets
+.env
+.env.local
+.env.production
+.env.staging
+*.env
 
-# Ignore data files (optional)
-data/*
+# API keys and credentials
+config/secrets.json
+credentials/
+keys/
 
-# Ignore Python cache
+# Data files (keep structure, ignore content)
+data/raw/*.csv
+data/raw/*.json
+data/raw/*.parquet
+data/processed/*.csv
+data/processed/*.json
+data/processed/*.parquet
+
+# Python cache and bytecode
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.so
+.Python
 
-# Ignore environment files
-.env
-*.env
-
-# Ignore Jupyter notebook checkpoints
+# Jupyter notebook checkpoints
 .ipynb_checkpoints/
+*.ipynb_checkpoints
 
-# Ignore virtual environments
+# Virtual environments
 venv/
 .venv/
+env/
+ENV/
+.env/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+logs/
+temp/
+
+# Distribution and packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing and coverage
+.coverage
+.pytest_cache/
+.tox/
+htmlcov/
+.coverage.*
+
+# Financial data and models (sensitive)
+models/trained_models/
+models/checkpoints/
+reports/confidential/
