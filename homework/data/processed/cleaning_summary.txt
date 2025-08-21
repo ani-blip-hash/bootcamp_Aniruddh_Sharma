@@ -1,0 +1,17 @@
+DATA CLEANING SUMMARY
+==================================================
+
+Original dataset shape: (365, 13)
+Cleaned dataset shape: (365, 13)
+Rows removed: 0
+Missing values before: 89
+Missing values after: 0
+
+CLEANING OPERATIONS PERFORMED:
+1. Filled missing values in daily_return with median
+2. Filled missing values in technical indicators with median
+3. Normalized price and volume data using standard scaling
+
+COLUMNS PROCESSED:
+- Median-filled: daily_return, volatility_20d, sma_20, sma_50
+- Normalized: open, high, low, close, volume
