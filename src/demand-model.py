@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 from sklearn.ensemble import RandomForestRegressor
 
 def train_model(data_path):
@@ -14,5 +15,9 @@ def train_model(data_path):
     return model
 
 if __name__ == "__main__":
-    model = train_model("../data/sample_bike_data.csv")
+    # Get the project root directory
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    data_path = os.path.join(project_root, "data", "sample_bike_data.csv")
+    
+    model = train_model(data_path)
     print("Model trained successfully!")
