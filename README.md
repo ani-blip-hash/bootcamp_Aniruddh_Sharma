@@ -67,6 +67,124 @@ Our data preprocessing pipeline implements a systematic approach to handle missi
 
 ---
 
+## Feature Engineering Documentation
+
+### Engineered Features
+
+#### 1. Momentum Features
+- **Price Momentum**: `price_momentum_5`, `price_momentum_10`, `price_momentum_20` - Rate of change over different periods
+- **Return Momentum**: `return_momentum_5`, `return_momentum_10`, `return_momentum_20` - Rolling average returns
+- **RSI**: `rsi_14`, `rsi_30` - Relative Strength Index for overbought/oversold conditions
+- **MACD**: `macd`, `macd_signal`, `macd_histogram` - Moving Average Convergence Divergence
+- **Price Position**: `price_vs_sma20`, `price_vs_sma50` - Relative position to moving averages
+
+#### 2. Volatility Features
+- **Volatility Ratios**: `vol_ratio_5_20`, `vol_ratio_10_20` - Short vs long-term volatility
+- **Volatility-Adjusted Returns**: `vol_adj_return_5`, `vol_adj_return_20` - Risk-adjusted performance
+- **Bollinger Bands**: `bb_position` - Position within Bollinger Bands
+- **Average True Range**: `atr`, `atr_ratio` - Volatility measure and normalization
+
+#### 3. Volume Features
+- **Volume Ratios**: `volume_ratio_5`, `volume_ratio_10`, `volume_ratio_20` - Current vs average volume
+- **Volume Momentum**: `volume_momentum_5`, `volume_momentum_10` - Volume rate of change
+- **Price-Volume**: `pv_trend` - Combined price and volume signal
+- **On-Balance Volume**: `obv`, `obv_signal` - Cumulative volume indicator
+
+#### 4. Cross-Asset Features
+- **Market Metrics**: `market_return_mean`, `market_return_std`, `market_volatility` - Market-wide indicators
+- **Relative Performance**: `relative_return`, `relative_volatility` - Asset vs market performance
+- **Beta**: `beta_20` - 20-day rolling correlation with market
+- **Market Regime**: `market_stress`, `market_direction` - Market condition indicators
+
+#### 5. Lag Features
+- **Return Lags**: `daily_return_lag_1`, `daily_return_lag_2`, `daily_return_lag_3`, `daily_return_lag_5`
+- **Volatility Lags**: `volatility_20_lag_1`, `volatility_20_lag_2`, `volatility_20_lag_3`
+- **Volume Lags**: `volume_ratio_20_lag_1`, `volume_ratio_20_lag_2`, `volume_ratio_20_lag_3`
+- **Rolling Statistics**: `daily_return_roll_mean_3`, `daily_return_roll_std_7`, etc.
+
+### Feature Rationale
+
+**Momentum Features**: Capture trend-following and mean-reversion patterns in financial markets. RSI and MACD are widely used technical indicators that signal potential reversal points.
+
+**Volatility Features**: Risk-adjusted returns normalize performance by volatility, crucial for portfolio optimization. Bollinger Bands identify overbought/oversold conditions.
+
+**Volume Features**: Volume confirms price movements and indicates institutional interest. High volume with price movement suggests stronger trends.
+
+**Cross-Asset Features**: Market-wide indicators help identify systematic risk and regime changes that affect all assets.
+
+**Lag Features**: Essential for time series modeling, capturing temporal dependencies and autocorrelation in financial data.
+
+---
+
+## Outlier Analysis Documentation
+
+### Outlier Detection Methods
+
+#### 1. IQR Method
+- **Threshold**: 1.5 × IQR (Interquartile Range)
+- **Use Case**: General outlier detection, robust to distribution shape
+- **Implementation**: `outliers.detect_outliers_iqr()`
+
+#### 2. Z-Score Method
+- **Threshold**: |z| > 3.0
+- **Use Case**: Normally distributed data
+- **Implementation**: `outliers.detect_outliers_zscore()`
+
+#### 3. Modified Z-Score Method
+- **Threshold**: |modified_z| > 3.5
+- **Use Case**: Financial returns (more robust than standard Z-score)
+- **Implementation**: `outliers.detect_outliers_modified_zscore()`
+
+#### 4. Isolation Forest
+- **Contamination**: 10% expected outliers
+- **Use Case**: Multivariate outlier detection
+- **Implementation**: `outliers.detect_outliers_isolation_forest()`
+
+### Outlier Treatment Strategies
+
+1. **Removal**: Complete removal of outlier observations
+2. **Winsorization**: Capping extreme values at percentile thresholds
+3. **Flagging**: Marking outliers without removal for analysis
+
+### Risk Assessment
+
+**Data Loss Risk**: IQR method typically removes 3-7% of data, Z-score removes 1-3%
+**Bias Risk**: Outlier removal can shift mean returns by 0.1-0.5%
+**Model Impact**: Outlier treatment generally improves model stability but may reduce R² by 0.01-0.03
+
+---
+
+## Model Assumptions and Risks
+
+### Linear Regression Assumptions
+1. **Linearity**: Linear relationship between features and target
+2. **Independence**: Residuals are independent (Durbin-Watson test)
+3. **Homoscedasticity**: Constant variance of residuals
+4. **Normality**: Residuals follow normal distribution
+5. **No Multicollinearity**: Features are not perfectly correlated
+
+### Time Series Model Assumptions
+1. **Stationarity**: Statistical properties constant over time
+2. **Temporal Dependencies**: Past values influence future values
+3. **No Look-Ahead Bias**: Only historical data used for predictions
+4. **Regime Stability**: Model parameters stable across market conditions
+
+### Risk Factors
+1. **Overfitting**: High complexity models may not generalize
+2. **Regime Changes**: Market shifts can invalidate historical patterns
+3. **Data Quality**: Missing or incorrect data affects model performance
+4. **Feature Stability**: Engineered features may lose predictive power
+5. **Survivorship Bias**: Analysis limited to currently active stocks
+
+### Mitigation Strategies
+- Time series cross-validation for temporal data
+- Regular model retraining and validation
+- Ensemble methods to reduce overfitting
+- Robust feature engineering with domain knowledge
+- Comprehensive backtesting across different market periods
+
+---
+
 ## Stakeholder Context
 
 See [/docs/stakeholder_memo.md](docs/stakeholder_memo.md).
